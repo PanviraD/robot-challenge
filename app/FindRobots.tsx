@@ -1,31 +1,11 @@
 'use client';
+import { Badge, Flex } from '@radix-ui/themes';
 import React from 'react';
+import { LostIndex, Index, Move, Axis, Pole, Robot } from './utils/types';
 
-interface Robot {
-  x: number;
-  y: number;
-  direction: string;
-  move: string;
-}
-
-interface Stack {
-  robotNo: number;
-  xAxis: number;
-  yAxis: number;
-  direction: string;
-}
-
-type Props = {
+export type Props = {
   gridArea: Index;
   robots: Robot[];
-};
-type Move = 'L' | 'R';
-type Axis = '+y' | '-y' | '+x' | '-x';
-type Index = [number, number];
-type LostIndex = {
-  robotId: number;
-  index: Index;
-  axis: Axis;
 };
 
 const FindRobots = ({ gridArea, robots }: Props): JSX.Element => {
@@ -55,13 +35,7 @@ const FindRobots = ({ gridArea, robots }: Props): JSX.Element => {
         result[i] = {
           robotId: i,
           index: lastValidIndex,
-          direction: currAxis,
-          lost: true,
-        };
-        result[i] = {
-          robotId: i,
-          index: lastValidIndex,
-          direction: currAxis,
+          direction: convertToPole(currAxis),
           lost: true,
         };
 
@@ -77,26 +51,35 @@ const FindRobots = ({ gridArea, robots }: Props): JSX.Element => {
       result[i] = {
         robotId: i,
         index: currIndex,
-        direction: currAxis,
+        direction: convertToPole(currAxis),
       };
     }
   }
 
   return (
     <div>
-      {result.map((x) => {
-        return (
-          <div key={x.robotId} className='py-4'>
-            <div>Robot Id: {x.robotId}</div>
-            <div className='flex'>
-              <div className='pr-4'>X Axis: {x.index[0]}</div>
-              <div className='pr-4'>Y Axis: {x.index[1]}</div>
-              {x.lost && <div>Lost: true</div>}
-            </div>
-            <div>Direction: {x.direction}</div>
-          </div>
-        );
-      })}
+      <div>
+        <Badge variant='solid' size='3'>
+          Current Grid Area: {gridArea[0]}, {gridArea[1]}
+        </Badge>
+        {result.map((x) => {
+          return (
+            <Flex key={x.robotId} className='py-4 flex-col'>
+              <Badge variant='surface' size='2'>
+                Robot Number: {x.robotId + 1}
+              </Badge>
+              <div className='flex'>
+                <div className='pr-4'>X: {x.index[0]}</div>
+                <div className='pr-4'>Y: {x.index[1]}</div>
+                <div className='pr-4'>Direction: {x.direction}</div>
+                {x.lost && (
+                  <div className='font-semibold text-red-700'>Lost</div>
+                )}
+              </div>
+            </Flex>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -169,5 +152,17 @@ export function convertToAxis(pole: string): Axis {
     return '-y';
   } else {
     return '-x';
+  }
+}
+
+export function convertToPole(axis: Axis): Pole {
+  if (axis === '+y') {
+    return 'N';
+  } else if (axis === '+x') {
+    return 'E';
+  } else if (axis === '-y') {
+    return 'S';
+  } else {
+    return 'W';
   }
 }
