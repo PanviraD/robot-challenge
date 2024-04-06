@@ -37,7 +37,7 @@ const Form = ({ grid, setGrid, robots, setRobots }: Props) => {
   ) {
     const isMovesCorrect = moves
       ?.split('')
-      .find((x) => x !== 'F' && x !== 'L' && x !== 'R');
+      .find((x) => !['F', 'L', 'R'].includes(x));
     const x = Number(dropXAxis);
     const y = Number(dropYAxis);
     if (!grid[0] || !grid[1]) {
