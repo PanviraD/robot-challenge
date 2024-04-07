@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About This App
+
+This app is deployed on Azure container app, access through this link: [https://robot-challenge.delightfulmeadow-d868028b.uksouth.azurecontainerapps.io](https://robot-challenge.delightfulmeadow-d868028b.uksouth.azurecontainerapps.io)
+
+Here you can create you grid area on Mars for your robot research. You can assign robot drop point on the grid, and assign which pole it is facing ( North/ East/ South/ West ). You can move the robot by console its rotation using L and R ( Left/ Right), and use F ( Front ) to let the robot move forward by 1 grid box.
+
+Beaware that robot will be lost if it moves out of the grid area. However the spot the previous robot was lost will leave some scent for next robot to not get lost at the same spot.
+
+\*Grid area can be define only once, please refresh to restart.
 
 ## Getting Started
 
-First, run the development server:
+To install:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`pnpm install`
+
+To run the app using docker image (build and run):
+
+`pnpm run docker:run`
+
+To run the development server:
+
+`pnpm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running Test
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To run test against port 3000:
 
-## Learn More
+`pnpm run test`
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js
+- React
+- Taiwind CSS
+- RadixUI - UI component
+- Vitest - Unit Testing
+- Docker - Container repository
+- Azure Container App - Deployment
+- Github Action - CI/CD - coming soon

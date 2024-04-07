@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "docker:run": "docker build -t robot-challenge . & docker run -p 3000:3000 robot-challenge"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
